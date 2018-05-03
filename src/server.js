@@ -28,9 +28,11 @@ if (process.env.PORT) {
   PORT = parseInt(process.env.PORT, 10);
 }
 
+const localhost = process.env.GITHUNT_LOCALHOST || 'localhost';
+
 const API_HOST =
   process.env.NODE_ENV !== 'production'
-    ? 'http://localhost:3010'
+    ? `http://${localhost}:3010`
     : 'https://api.githunt.com';
 
 const app = new Express();
@@ -48,7 +50,10 @@ if (process.env.NODE_ENV === 'production') {
   // Otherwise we want to proxy the webpack development server.
   app.use(
     '/static',
-    proxy({ target: 'http://localhost:3020', pathRewrite: { '^/static': '' } })
+    proxy({
+      target: `http://${localhost}:3020`,
+      pathRewrite: { '^/static': '' },
+    })
   );
 }
 const links = [
@@ -100,6 +105,6 @@ app.use((req, res) => {
 app.listen(PORT, () =>
   console.log(
     // eslint-disable-line no-console
-    `App Server is now running on http://localhost:${PORT}`
+    `App Server is now running on http://${localhost}:${PORT}`
   )
 );

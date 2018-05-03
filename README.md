@@ -39,6 +39,8 @@ npm run dev
 
 ![GitHunt App](screenshots/GitHunt-app.png)
 
+**Note:** If you would like to run the app using a local hostname other than `localhost`, store the new hostname in a `GITHUNT_LOCALHOST` environment variable (e.g. `export GITHUNT_LOCALHOST="local.dev"`), before starting the app.
+
 ### Hybrid Transport
 GitHunt has support for hybrid transport (HTTP for queries and mutations, WebSockets for subscriptions). You can view the implementation in `src/links.js`.
 

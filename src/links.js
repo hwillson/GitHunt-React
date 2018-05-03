@@ -21,11 +21,13 @@ export const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
+const localhost = process.env.GITHUNT_LOCALHOST || 'localhost';
+
 export const subscriptionLink = (config = {}) =>
   new WebSocketLink({
     uri:
       process.env.NODE_ENV !== 'production'
-        ? 'ws://localhost:3010/subscriptions'
+        ? `ws://${localhost}:3010/subscriptions`
         : 'wss://api.githunt.com/subscriptions',
     options: { reconnect: true },
     ...config,
